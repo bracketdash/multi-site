@@ -1,0 +1,10 @@
+{
+    "short_name": "ExampleSite3",
+    "name": "Example Site 3",
+    "icons": [],
+    "start_url": "/",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#999999"
+}

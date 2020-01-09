@@ -1,0 +1,31 @@
+[
+    {
+        "route": "/",
+        "scope": "template",
+        "view": "home"
+    },
+    {
+        "route": "/manifest.json",
+        "special": "manifest"
+    },
+    {
+        "route": "/serviceworker.js",
+        "special": "serviceworker"
+    },
+    {
+        "route": "/sitemap.xml",
+        "special": "sitemap"
+    },
+    {
+        "route": "/robots.txt",
+        "special": "robots"
+    },
+    {
+        "route": "/favicon.ico",
+        "special": "favicon"
+    },
+    {
+        "route": "/reload-routes",
+        "special": "reloadRoutes"
+    }
+]

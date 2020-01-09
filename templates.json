@@ -1,0 +1,10 @@
+[
+    {
+        "name": "exampletemplate",
+        "sites": ["examplesite", "examplesite2"]
+    },
+    {
+        "name": "exampletemplate2",
+        "sites": ["examplesite3"]
+    }
+]

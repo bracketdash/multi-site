@@ -1,0 +1,13 @@
+extends /views/master.amp.pug
+
+append head
+    title Example Template 2 Home
+    link(rel="canonical" href=".")
+    script(async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js")
+    script(async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js")
+
+append ampStyles
+    include /public/css/exampletemplate2/home.css
+
+append pageContent
+    | Example Template 2 Home Page Content

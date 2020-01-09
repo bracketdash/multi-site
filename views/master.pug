@@ -1,0 +1,14 @@
+case template
+    when 'exampletemplate'
+        include layouts/exampletemplate.pug
+doctype
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1")
+        +headAppends
+        block head
+    body
+        +header
+        block pageContent
+        +footer
