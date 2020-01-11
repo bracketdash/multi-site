@@ -1,3 +1,3 @@
 function hello(who) {
-    `Hello, ${who}!`
-};
+    return `Hello, ${who}!`;
+}
