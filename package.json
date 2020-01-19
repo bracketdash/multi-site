@@ -23,7 +23,7 @@
         "swagger-editor-dist": "^3.7.1"
     },
     "devDependencies": {
-        "node-sass": "^4.13.0",
+        "node-sass": "^4.13.1",
         "prettier": "^1.19.1",
         "typescript": "^3.7.3",
         "uglifyjs-folder": "^1.5.1"
