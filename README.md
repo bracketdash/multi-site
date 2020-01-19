@@ -1,4 +1,4 @@
-# Simple Server Multisite
+# A Simple Multi-Site Server
 
 Requires [NodeJS](https://nodejs.org/en/) v12.14.0 or above.
 
