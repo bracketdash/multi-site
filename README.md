@@ -46,36 +46,19 @@ This will **start fresh JS & CSS directories, then transpile and minify all TS &
 
     npm run freshmin
 
-# Technical Goals & Notes
-
-### Separation of Concerns
-
--   A primary goal of this client server is to employ as little logic as possible on the server-side.
--   The client server should be unaware of and should never connect directly to other company services.
--   Code _contained_ in files served to the browser _can and should_ connect to other company services (i.e. our API).
-
-### Where does this client server fit in a server ecosystem?
-
--   It is intended that we spin up a production server for each site and that it controls the "www" and subdomainless addresses.
--   When we're ready to install SSL certificates, they can be handled with a few extra lines in `app.js`.
--   This was developed with the assumption that an API will live on a different domain or a subdomain (e.g. api.domain.com)
-
-### Routing in Express
+## Routing in Express
 
 -   See the [Express Docs on Routing](https://expressjs.com/en/guide/routing.html).
--   GET Requests Only: There should be no reason a POST or other method should need to be made to the client server.
--   Requests may include query params, but nothing server-side should happen with the data that's not templating-related.
--   In most cases, query params and hash data are just passed _through_ the client server to be available for code running in the browser.
 -   If the route uses wildcards or regular expression, route params will also be passed down to the Pug files.
 -   All route files are kept in `/routes/` (go figure) and are broken down by...
     -   `common`: For routes that are shared across all sites.
     -   `template`: For routes shared across sites with the same template.
     -   `site`: For site-specific routes.
 
-### Markup in Pug
+## Markup in Pug
 
--   This client server uses Pug as the markup templating language, which has a [different syntax than HTML](https://pugjs.org/api/getting-started.html).
--   Pug allows us to do some dynamic templating without overcomplicating our custom code.
+-   This server uses Pug as the markup templating language, which has a [different syntax than HTML](https://pugjs.org/api/getting-started.html).
+-   Pug allows for dynamic templating without overcomplicating your custom code.
 -   Pug automatically caches templates when the server is in production mode.
 -   There are two main wrapper files: `master.pug` and `master.amp.pug`
     -   These master files are extended by the page files, and pull in the appropriate layout mixin file.
@@ -84,11 +67,6 @@ This will **start fresh JS & CSS directories, then transpile and minify all TS &
     -   `template`: For pages shared across sites with the same template.
     -   `site`: For site-specific pages.
 
-### Scripts & Styles in TypeScript & Sass
-
--   TypeScript (TS) and SCSS are supersets of JS and CSS, so regular JS and CSS can be used within .ts and .scss files.
--   Refrain from editing files in `/public/js` and `/public/css` directly, as they will be overwritten by the NPM scripts above.
-
 # Top-Level Directories & Files
 
 -   `node_modules`: Where dependencies are kept; is git-ignored and populated with `npm install`; no need to touch this
@@ -96,12 +74,12 @@ This will **start fresh JS & CSS directories, then transpile and minify all TS &
 -   `routes`: A collection of JSON files that contain all the routes
 -   `scss`: All styles should go here, and are compiled with `scss-watch` or `scss-build` into `/public/css`
 -   `ts`: All client-side scripts should go here, and are compiled with `ts-watch` or `ts-build` into `/public/js`
--   `views`: All markup templates should go here, and are served by the client server application
+-   `views`: All markup templates should go here, and are served by app.js
 -   `app.js`: Once instantiated with a site and port, handles the routing of incoming HTTP requests and serves rendered Pug files
 -   `package.json`: Defines basic project configuration data: name, dependencies, scripts, etc.
 -   `package-lock.json`: Another config file required by the NPM ecosystem; no need to touch this
--   `templates.json`: Where we define all of our sites and the templates to which they belong
--   `tsconfig.json`: A config file for TypeScript; no need to touch this
+-   `templates.json`: Where you define all your sites and the templates to which they belong
+-   `tsconfig.json`: A config file for TypeScript
 -   `README.md`: This is the file you're reading right now!
 
 # Properties of The Route Object
