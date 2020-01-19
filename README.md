@@ -2,31 +2,31 @@
 
 Requires [NodeJS](https://nodejs.org/en/) v12.14.0 or above.
 
-First time? This will **install server dependencies**:
+First time? This will install server dependencies:
 
     npm install
 
-Want to **start serving a site at localhost**?
+Want to start serving a site at localhost?
 
     node app.js (site) (port)
 
 ### Working on scripts?
 
-This will **transpile your TypeScript on save**:
+This will transpile your TypeScript on save:
 
     npm run ts-watch
 
-Made script changes without the watcher running? This will do a **one-time transpile of all TypeScript**:
+Made script changes without the watcher running? This will do a one-time transpile of all TypeScript:
 
     npm run ts-build
 
 ### Working on styles?
 
-This will **transpile your SCSS on save**:
+This will transpile your SCSS on save:
 
     npm run scss-watch
 
-Made style changes without the watcher running? This will do a **one-time transpile of all SCSS**:
+Made style changes without the watcher running? This will do a one-time transpile of all SCSS:
 
     npm run scss-build
 
@@ -34,7 +34,7 @@ Made style changes without the watcher running? This will do a **one-time transp
 
     curl "(site instance address)/reload-routes"
 
-> Only new or changed non-special routes can be refreshed in this way. For deleting routes or changing special routes, you will need to restart `app.js`
+Only new or changed non-special routes can be refreshed in this way. For deleting routes or changing special routes, you will need to restart `app.js`
 
 ### Ready for production?
 
@@ -42,7 +42,7 @@ It's always nice to make sure a consistent code style is followed for TS and SCS
 
     npm run prettier
 
-This will **start fresh JS & CSS directories, then transpile and minify all TS & SCSS**:
+This will start fresh JS & CSS directories, then transpile and minify all TS & SCSS:
 
     npm run freshmin
 
