@@ -67,7 +67,7 @@ This will **start fresh JS & CSS directories, then transpile and minify all TS &
     -   `template`: For pages shared across sites with the same template.
     -   `site`: For site-specific pages.
 
-# Top-Level Directories & Files
+## Top-Level Directories & Files
 
 -   `node_modules`: Where dependencies are kept; is git-ignored and populated with `npm install`; no need to touch this
 -   `public`: Where files are kept that should be directly accessible over HTTP via the browser
@@ -82,7 +82,7 @@ This will **start fresh JS & CSS directories, then transpile and minify all TS &
 -   `tsconfig.json`: A config file for TypeScript
 -   `README.md`: This is the file you're reading right now!
 
-# Properties of The Route Object
+## Properties of The Route Object
 
 -   `route`:
     -   Required for all routes
