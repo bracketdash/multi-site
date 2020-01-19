@@ -1,4 +1,4 @@
-# Multi-Site Client Server
+# Simple Server Multisite
 
 Requires [NodeJS](https://nodejs.org/en/) v12.14.0 or above.
 
