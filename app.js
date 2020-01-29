@@ -1,20 +1,19 @@
-// ensure the dev is calling both required arguments
-if (process.argv.length < 4) {
-    console.log("Site and port are required");
-    console.log("Syntax: node app.js (sitename) (port)");
-    return;
-}
-// ensure the port the dev provided is a plain integer
-if (Math.round(parseInt(process.argv[3])) != process.argv[3]) {
-    console.log("Port must be an integer");
-    console.log("Syntax: node app.js (sitename) (port)");
-    return;
-}
+// handle script arguments with yargs
+const argv = require("yargs")
+    .demandOption(["site"])
+    .default("port", 80)
+    .alias("s", "site")
+    .alias("p", "port")
+    .alias("i", "ip")
+    .describe("site", "The name of the site to serve")
+    .describe("port", "The port on which to serve the site")
+    .describe("ip", "Optionally bind the site to an IP")
+    .describe("ssl", "The domain for which to set up SSL").argv;
 // okay, things look good for now; let's pull in fs
 const fs = require("fs");
 // assign the script arguments to site and port constants
-const site = process.argv[2];
-const port = parseInt(process.argv[3]);
+const site = argv.site;
+const port = parseInt(argv.port);
 // pull in our templates and try to assign a default template for our views
 let defaultTemplate;
 JSON.parse(fs.readFileSync(__dirname + "/templates.json")).some(function(templateDef) {
@@ -36,6 +35,11 @@ const router = express.Router();
 app.set("view engine", "pug");
 // explicitly set the base directory (fixes a path issue in the pug files)
 app.locals.basedir = __dirname;
+// quick utility for later use
+function isRequestComingFromGiftTree(req) {
+    // TODO: check for a list of IPs
+    return true;
+}
 // pull in the applicable routes for this site and loop through them
 let routes = {};
 function loadRoutes() {
@@ -77,8 +81,12 @@ function loadRoutes() {
                             break;
                         case "reloadRoutes":
                             router.get(route.route, function(req, res) {
-                                loadRoutes();
-                                res.send("Routes reloaded successfully.");
+                                if (isRequestComingFromGiftTree(req)) {
+                                    loadRoutes();
+                                    res.send("Routes reloaded successfully.");
+                                } else {
+                                    res.status(404).send("This route is only available internally.");
+                                }
                             });
                             break;
                         case "robots":
@@ -146,10 +154,20 @@ function loadRoutes() {
 }
 loadRoutes();
 // if we made it here, no issues were found with the applicable routes
-app.use('/', router);
+app.use("/", router);
 // serve /public at site root (i.e. /public/file.ext serves at domain.com/file.ext)
 app.use(express.static("public"));
+// some special sauce only for gs4
+if (site === "gs4") {
+    // serve the Swagger Editor folder so index.html can access the files from where it thinks they are (keeping it in node_modules ensures we can update easily)
+    app.use("/it", express.static("node_modules/swagger-editor-dist"));
+}
 // **ALWAYS HAVE AS LAST APP.USE** 404 Handler
 app.use((req, res) => res.status(404).render(__dirname + "/views/pages/common/404"));
 // start listening on the dev-provided port
-app.listen(port, () => console.log(`Now serving site "${site}" at http://localhost:${port}/...`));
+if (argv.ip) {
+    // if the dev provided an ip, also bind to that
+    app.listen(port, argv.ip, () => console.log(`Now serving site "${site}" on IP ${argv.ip} and port ${port}`));
+} else {
+    app.listen(port, () => console.log(`Now serving site "${site}" at http://localhost:${port}/`));
+}

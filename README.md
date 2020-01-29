@@ -2,13 +2,17 @@
 
 Requires [NodeJS](https://nodejs.org/en/) v12.14.0 or above.
 
-First time? This will install server dependencies:
+Run `npm install` if you're starting fresh or it's been a while.
 
-    npm install
+Run `node start -- -s (site)` to serve a site (the middle dashes are required):
 
-Want to start serving a site at localhost?
-
-    node app.js (site) (port)
+    Options:
+    --help      Show help                                                [boolean]
+    --version   Show version number                                      [boolean]
+    --ssl       The domain for which to set up SSL
+    -s, --site  The name of the site to serve                           [required]
+    -p, --port  The port on which to serve the site       [required] [default: 80]
+    -i, --ip    Optionally bind the site to an IP
 
 ### Working on scripts?
 
