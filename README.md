@@ -9,7 +9,6 @@ Run `node start -- -s (site)` to serve a site (the middle dashes are required):
     Options:
     --help      Show help                                                [boolean]
     --version   Show version number                                      [boolean]
-    --ssl       The domain for which to set up SSL
     -s, --site  The name of the site to serve                           [required]
     -p, --port  The port on which to serve the site       [required] [default: 80]
     -i, --ip    Optionally bind the site to an IP

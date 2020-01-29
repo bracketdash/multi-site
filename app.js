@@ -7,8 +7,7 @@ const argv = require("yargs")
     .alias("i", "ip")
     .describe("site", "The name of the site to serve")
     .describe("port", "The port on which to serve the site")
-    .describe("ip", "Optionally bind the site to an IP")
-    .describe("ssl", "The domain for which to set up SSL").argv;
+    .describe("ip", "Optionally bind the site to an IP").argv;
 // okay, things look good for now; let's pull in fs
 const fs = require("fs");
 // assign the script arguments to site and port constants
