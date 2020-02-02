@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "A multisite client server.",
     "author": "Michael Hatch",
-    "license": "UNLICENSED",
+    "license": "MIT",
     "main": "app.js",
     "repository": {
         "url": "https://github.com/bracketdash/multisite-client-server.git"
