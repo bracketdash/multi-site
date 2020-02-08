@@ -8,11 +8,14 @@ const argv = require("yargs")
     .describe("site", "The name of the site to serve")
     .describe("port", "The port on which to serve the site")
     .describe("ip", "Optionally bind the site to an IP").argv;
+
 // okay, things look good for now; let's pull in fs
 const fs = require("fs");
+
 // assign the script arguments to site and port constants
 const site = argv.site;
 const port = parseInt(argv.port);
+
 // pull in our templates and try to assign a default template for our views
 let defaultTemplate;
 JSON.parse(fs.readFileSync(__dirname + "/templates.json")).some(function(templateDef) {
@@ -21,24 +24,30 @@ JSON.parse(fs.readFileSync(__dirname + "/templates.json")).some(function(templat
         return true;
     }
 });
+
 // if the template couldn't be assigned, the site was misspelled or needs to be added to templates.json
 if (!defaultTemplate) {
     console.log("Site provided is not configured in templates.json");
     return;
 }
+
 // okay cool, a valid site and port have been provided, let's pull in express and create our server and router instances
 const express = require("express");
 const app = express();
 const router = express.Router();
+
 // set the view engine to use pug
 app.set("view engine", "pug");
+
 // explicitly set the base directory (fixes a path issue in the pug files)
 app.locals.basedir = __dirname;
+
 // quick utility for later use
-function isRequestComingFromGiftTree(req) {
+function isRequestComingFromWhitelist(req) {
     // TODO: check for a list of IPs
     return true;
 }
+
 // pull in the applicable routes for this site and loop through them
 let routes = {};
 function loadRoutes() {
@@ -80,7 +89,7 @@ function loadRoutes() {
                             break;
                         case "reloadRoutes":
                             router.get(route.route, function(req, res) {
-                                if (isRequestComingFromGiftTree(req)) {
+                                if (isRequestComingFromWhitelist(req)) {
                                     loadRoutes();
                                     res.send("Routes reloaded successfully.");
                                 } else {
@@ -152,17 +161,16 @@ function loadRoutes() {
     });
 }
 loadRoutes();
+
 // if we made it here, no issues were found with the applicable routes
 app.use("/", router);
+
 // serve /public at site root (i.e. /public/file.ext serves at domain.com/file.ext)
 app.use(express.static("public"));
-// some special sauce only for gs4
-if (site === "gs4") {
-    // serve the Swagger Editor folder so index.html can access the files from where it thinks they are (keeping it in node_modules ensures we can update easily)
-    app.use("/it", express.static("node_modules/swagger-editor-dist"));
-}
+
 // **ALWAYS HAVE AS LAST APP.USE** 404 Handler
 app.use((req, res) => res.status(404).render(__dirname + "/views/pages/common/404"));
+
 // start listening on the dev-provided port
 if (argv.ip) {
     // if the dev provided an ip, also bind to that
