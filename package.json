@@ -20,13 +20,13 @@
     "dependencies": {
         "express": "^4.17.1",
         "pug": "^2.0.4",
-        "swagger-editor-dist": "^3.7.1"
+        "swagger-editor-dist": "^3.8.0"
     },
     "devDependencies": {
         "node-sass": "^4.13.1",
         "prettier": "^1.19.1",
-        "typescript": "^3.7.3",
-        "uglifyjs-folder": "^1.5.1"
+        "typescript": "^3.7.5",
+        "uglifyjs-folder": "^1.5.2"
     },
     "prettier": {
         "tabWidth": 4,
