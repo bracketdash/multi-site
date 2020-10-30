@@ -1,16 +1,8 @@
 {
     "name": "multisite-client-server",
     "version": "1.0.0",
-    "description": "A multisite client server.",
-    "author": "Michael Hatch",
-    "license": "MIT",
-    "main": "app.js",
-    "repository": {
-        "url": "https://github.com/bracketdash/multisite-client-server.git"
-    },
     "scripts": {
         "freshmin": "rm -R public/css && rm -R public/js && node-sass scss/ -o public/css/ --output-style compressed && tsc && uglifyjs-folder public/js -e -x .js -o public/js",
-        "prettier": "prettier --write \"{scss,ts}/**\"",
         "scss-build": "node-sass scss/ -o public/css/",
         "scss-watch": "node-sass -w scss/ -o public/css/",
         "start": "node app.js",
@@ -20,16 +12,11 @@
     "dependencies": {
         "express": "^4.17.1",
         "pug": "^2.0.4",
-        "swagger-editor-dist": "^3.8.0"
+        "swagger-editor-dist": "^3.14.5"
     },
     "devDependencies": {
-        "node-sass": "^4.13.1",
-        "prettier": "^1.19.1",
-        "typescript": "^3.7.5",
-        "uglifyjs-folder": "^1.5.2"
-    },
-    "prettier": {
-        "tabWidth": 4,
-        "printWidth": 124
+        "node-sass": "^4.14.1",
+        "typescript": "^3.9.7",
+        "uglifyjs-folder": "^1.5.4"
     }
 }
